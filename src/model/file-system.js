@@ -12,25 +12,6 @@ class FileSystem {
         }
     }
 
-    addChild(parentId, name) {
-        const parentNode = this.searchRecursively(parentId, this.root)
-        return parentNode.addChild(name)
-    }
-
-    getChildren(id) {
-        return this.getNode(id).children
-    }
-
-    getNode(id) {
-        const node = this.searchRecursively(id, this.root)
-        if (node) {
-            return node
-        }
-        throw {
-            id: 1
-        }
-    }
-
     searchRecursively = (id, node) => {
         if (node.id === id) {
             return node
@@ -47,6 +28,62 @@ class FileSystem {
         }
         return null
     }
+
+    getFolder(id) {
+        return this.searchRecursively(id, this.root)
+    }
+
+    updateFolder(id, folderRequest) {
+        const node = this.searchRecursively(id, this.root)
+        if (node) {
+            return node.updateNode(folderRequest)
+        }
+        throw {
+            id: 1
+        }
+    }
+
+    getChildren(id) {
+        const node = this.searchRecursively(id, this.root)
+        if (node) {
+            return node.children
+        }
+        throw {
+            id: 1
+        }
+    }
+
+    addChild(parentId, name) {
+        const parentNode = this.searchRecursively(parentId, this.root)
+        if (parentNode) {
+            return parentNode.addChild(name)
+        }
+        throw {
+            id: 1
+        }
+    }
+
+    deleteChild(parentId, id) {
+        const parentNode = this.searchRecursively(parentId, this.root)
+        if (parentNode) {
+            return parentNode.deleteChild(id)
+        }
+        throw {
+            id: 1
+        }
+    }
+
+    rename(id, name) {
+        const node = this.searchRecursively(parentId, this.root)
+        if (node) {
+            node.rename(name)
+            return true
+        }
+        throw {
+            id: 1
+        }
+    }
+
 }
 
-module.exports.FileSystem = FileSystem
+module.exports = { FileSystem }
