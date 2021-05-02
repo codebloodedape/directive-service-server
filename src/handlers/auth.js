@@ -46,10 +46,12 @@ const authenticateRequest = function (req, res, next) {
         case '/LOGIN':
             if (ServerState.userCount === 20) {
                 res.status(403).json('server overload')
+                return
             }
             const userName = req.headers.username
             if (!userName) {
                 res.status(403).json('no username')
+                return
             }
             token = Date.now().toString() + '_' + userName
             ServerState.users[token] = {}

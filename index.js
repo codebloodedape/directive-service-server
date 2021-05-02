@@ -23,6 +23,8 @@ app.get('/folder/:id?', RequestHandler.getFolder)
 app.post('/folder/:id?', RequestHandler.updateFolder)
 app.delete('/folder/:id?', RequestHandler.deleteFolder)
 
-app.listen(port, () => {
-    console.log(`App started: http://localhost:${port}`)
-})
+// app.listen(port, () => {
+//     console.log(`App started: http://localhost:${port}`)
+// })
+app.listen(process.env.PORT || port, 
+	() => console.log("Server is running..."));
