@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(auth.authenticateRequest)
 
 app.get('/', (req, res) => {
-    res.redirect('/folder');
+    res.redirect('/folder/root');
 })
 
 // app.get('/test', handler.test)
